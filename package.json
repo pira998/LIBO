@@ -1,0 +1,19 @@
+{
+  "name": "librarymanagementsystem",
+  "version": "1.0.0",
+  "description": "Now I ready to create website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pira998/LIBO.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pira998/LIBO/issues"
+  },
+  "homepage": "https://github.com/pira998/LIBO#readme"
+}

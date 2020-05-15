@@ -4,6 +4,11 @@ include 'header.php';; ?>
 
 <div class="content">
     <div class="container-fluid">
+        <center>
+            <button class="btn btn-primary btn-round" type="submit" name="add">
+                <i class="material-icons">favorite</i> Add Student
+            </button>
+        </center>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

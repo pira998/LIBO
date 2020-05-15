@@ -17,11 +17,16 @@
     <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/demo/demo.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/librarian/assets/css/card.css" />
+    <link rel="stylesheet/less" type="text/css" href="/librarian/assets/scss/card.less" />
+    <link rel="stylesheet" href="/librarian/assets/css/table.css">
+    <!-- <link rel="stylesheet" href="/librarian/assets/css/bootstrap.min.css"> -->
 </head>
 
 <body class="">
     <div class="wrapper ">
-        <div class="sidebar" data-color="azure" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+        <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -196,8 +201,7 @@
                                 <img src="../assets/img/sidebar-4.jpg" alt="">
                             </a>
                         </li>
-                       
+
                     </ul>
                 </div>
             </div>
-
