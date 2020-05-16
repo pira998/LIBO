@@ -51,7 +51,7 @@ $array = mysqli_query($connection, $sql);
                 </div> -->
                 <!-- <!--  -->
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <article class="material-card Purple">
+                    <article class="material-card Indigo">
                         <h2>
                             <span><?php echo $book->getTitle() ?></span>
                             <strong>

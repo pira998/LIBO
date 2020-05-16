@@ -523,43 +523,43 @@
   border-color: #EDE7F6;
 }
 .material-card.Indigo h2 {
-  background-color: #3F51B5;
+  background-color: rgb(0, 0, 0);
 }
 .material-card.Indigo h2:after {
-  border-top-color: #3F51B5;
-  border-right-color: #3F51B5;
+  border-top-color: rgb(0, 0, 0);
+  border-right-color: rgb(0, 0, 0);
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
 .material-card.Indigo h2:before {
   border-top-color: transparent;
-  border-right-color: #1A237E;
-  border-bottom-color: #1A237E;
+  border-right-color: rgb(0, 0, 0);
+  border-bottom-color: rgb(0, 0, 0);
   border-left-color: transparent;
 }
 .material-card.Indigo.mc-active h2:before {
   border-top-color: transparent;
-  border-right-color: #3F51B5;
-  border-bottom-color: #3F51B5;
+  border-right-color: rgb(0, 0, 0);
+  border-bottom-color: rgb(0, 0, 0);
   border-left-color: transparent;
 }
 .material-card.Indigo.mc-active h2:after {
-  border-top-color: #1A237E;
-  border-right-color: #1A237E;
+  border-top-color: rgb(0, 0, 0);
+  border-right-color: rgb(0, 0, 0);
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
 .material-card.Indigo .mc-btn-action {
-  background-color: #3F51B5;
+  background-color: rgb(0, 0, 0);
 }
 .material-card.Indigo .mc-btn-action:hover {
-  background-color: #1A237E;
+  background-color: rgb(0, 0, 0);
 }
 .material-card.Indigo .mc-footer h4 {
-  color: #1A237E;
+  color: rgb(0, 0, 0);
 }
 .material-card.Indigo .mc-footer a {
-  background-color: #1A237E;
+  background-color: rgb(0, 0, 0);
 }
 .material-card.Indigo.mc-active .mc-content {
   background-color: #E8EAF6;
