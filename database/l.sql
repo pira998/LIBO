@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2020 at 01:00 PM
+-- Generation Time: May 16, 2020 at 10:40 AM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.27
+-- PHP Version: 7.2.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `database`
+-- Database: `l`
 --
 
 -- --------------------------------------------------------
@@ -37,23 +37,23 @@ CREATE TABLE `books_details` (
   `publisher` varchar(50) NOT NULL,
   `language` varchar(50) NOT NULL,
   `price` varchar(50) NOT NULL,
-  `authorname` varchar(50) NOT NULL,
+  `author` varchar(50) NOT NULL,
   `numOfPages` varchar(50) NOT NULL,
   `purchaseDate` varchar(50) NOT NULL,
   `publicationDate` varchar(50) NOT NULL,
-  `bookQty` varchar(50) NOT NULL,
-  `availableQty` varchar(50) NOT NULL,
-  `librarianUsername` varchar(50) NOT NULL
+  `quantity` varchar(50) NOT NULL,
+  `available` varchar(50) NOT NULL,
+  `librarian` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `books_details`
 --
 
-INSERT INTO `books_details` (`id`, `ISBN`, `title`, `subject`, `bookImg`, `publisher`, `language`, `price`, `authorname`, `numOfPages`, `purchaseDate`, `publicationDate`, `bookQty`, `availableQty`, `librarianUsername`) VALUES
-(11, '170033', 'computer kiramaam', 'story', 'book_images/53d345282593dc27d03a8222d41fa144s-l1600.jpg', 'Kizhakku pathipakam', 'Tamil', '350', 'Sujatha', '177', '26/04/2020', '04/07/2007', '50', '40', 'ps'),
+INSERT INTO `books_details` (`id`, `ISBN`, `title`, `subject`, `bookImg`, `publisher`, `language`, `price`, `author`, `numOfPages`, `purchaseDate`, `publicationDate`, `quantity`, `available`, `librarian`) VALUES
 (18, '201343', 'Meendum Jeeno', 'Story book', 'book_images/fe8796d482b57db79e071ea276eea6ecmeendum jeeno.jpg', 'Iyan story industry', 'Tamil', '240', 'Sujatha', '200', '07-05-2020', '06-12-1980', '20', '20', '180596E'),
-(19, '804324', 'En iniya Iyanthira', 'Story book', 'book_images/eb7dae24cc8803aa92fc7154e2e3a6f1en_iniya_iyanthira.jpg', 'Iyan story industry', 'Tamil', '540', 'Sujatha', '231', '07-05-2020', '06-12-2000', '55', '32', '180596E');
+(19, '804324', 'En iniya Iyanthira', 'Story book', 'book_images/eb7dae24cc8803aa92fc7154e2e3a6f1en_iniya_iyanthira.jpg', 'Iyan story industry', 'Tamil', '540', 'Sujatha', '231', '07-05-2020', '06-12-2000', '55', '32', '180596E'),
+(20, '55', 'Computer kiramam', 'Novel', 'book_images/99af9b899fe1764c01b0b455e35f03e953d345282593dc27d03a8222d41fa144s-l1600.jpg', 'asdfa', 'Tamil', '2334', 'Sujatha', '233', '1212312', '123123', '111', '111', 'ps');
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,8 @@ INSERT INTO `issue` (`id`, `s_regis_num`, `s_name`, `s_grade`, `s_address`, `s_e
 (9, '180476V', 'Piraveen ', '10', 'Jaffna', 'Veensiva10@gmail.com', 'En iniya Iyanthira', '07-05-2020', '07-05-2020', '180476L', '180596E'),
 (12, '180596E', 'Shanmugabavan', '12', 'Inuvil West, Inuvil', 'shanmugabavan25621@gmail.com', 'computer kiramaam', '07-05-20', '07-05-2020', 'Shanmu', '180596E'),
 (13, '180596E', 'Shanmugabavan', '12', 'Inuvil West, Inuvil', 'shanmugabavan25621@gmail.com', 'computer kiramaam', '07-05-20', '07-05-2020', 'Shanmu', '180596E'),
-(14, '180596E', 'Shanmugabavan', '12', 'Inuvil West, Inuvil', 'shanmugabavan25621@gmail.com', 'Meendum Jeeno', '07-05-2020', '', 'Shanmu', '180596E');
+(14, '180596E', 'Shanmugabavan', '12', 'Inuvil West, Inuvil', 'shanmugabavan25621@gmail.com', 'Meendum Jeeno', '07-05-2020', '07-05-2020', 'Shanmu', '180596E'),
+(15, '180596E', 'Shanmugabavan', '12', 'Inuvil West, Inuvil', 'shanmugabavan25621@gmail.com', 'Meendum Jeeno', '07-05-2020', '', 'Shanmu', 'ps');
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,8 @@ CREATE TABLE `librarian` (
 INSERT INTO `librarian` (`id`, `firstname`, `lastname`, `username`, `email`, `password`, `nic`, `date`) VALUES
 (1, 'Piraveen ', 'Sivakumar ', 'ps', 'Veensiva10@gmail.com', '1234', '45555554', '0000-00-00'),
 (4, 'Piraveen ', 'Sivakumar ', 'sd', 'piraveensivakumar998@gmail.com', '1234', '23232', '0000-00-00'),
-(5, 'Shanmu', 'asd', '180596E', 'shanmugabavan25621@gmail.com', '123456', 'dasd', '0000-00-00');
+(5, 'Shanmu', 'asd', '180596E', 'shanmugabavan25621@gmail.com', '123456', 'dasd', '0000-00-00'),
+(6, 'Piraveen12', 'Sivakumar22', '170288D', 'f', '1234', '2322221', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -124,7 +126,7 @@ CREATE TABLE `student_info` (
   `lastname` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `grade` varchar(6) NOT NULL,
-  `Address` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `email` varchar(500) NOT NULL,
   `nic` varchar(20) NOT NULL,
   `password` varchar(500) NOT NULL,
@@ -135,9 +137,11 @@ CREATE TABLE `student_info` (
 -- Dumping data for table `student_info`
 --
 
-INSERT INTO `student_info` (`id`, `regis_num`, `firstname`, `lastname`, `username`, `grade`, `Address`, `email`, `nic`, `password`, `status`) VALUES
-(1, '180476V', 'Piraveen ', 'Sivakumar ', '180476L', '10', 'Jaffna', 'Veensiva10@gmail.com', '45555554', '1234', 'Yes'),
-(2, '180596E', 'Shanmugabavan', 'Shanmugakumar', 'Shanmu', '12', 'Inuvil West, Inuvil', 'shanmugabavan25621@gmail.com', '180596E', 'Shanmu@25621', 'Yes');
+INSERT INTO `student_info` (`id`, `regis_num`, `firstname`, `lastname`, `username`, `grade`, `address`, `email`, `nic`, `password`, `status`) VALUES
+(1, '180476V', 'Piraveen ', 'Sivakumar ', '180476L', '10', 'Jaffna', 'Veensiva10@gmail.com', '2343', '1234', 'Yes'),
+(2, '180596E', 'Shanmugabavan', 'Shanmugakumar', 'Shanmu', '12', 'Inuvil West, Inuvil', 'shanmugabavan25621@gmail.com', '180596E', 'Shanmu@25621', 'Yes'),
+(5, 'asdfsa', 'asf', 'sdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', '', 'Yes'),
+(7, '234', 'hari', 'Sivakumar ', '170288D', '11', 'senior lane, Jaffna', 'piraveensivakumar998@gmail.com', '115', '', 'Yes');
 
 --
 -- Indexes for dumped tables
@@ -175,25 +179,25 @@ ALTER TABLE `student_info`
 -- AUTO_INCREMENT for table `books_details`
 --
 ALTER TABLE `books_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `issue`
 --
 ALTER TABLE `issue`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `librarian`
 --
 ALTER TABLE `librarian`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `student_info`
 --
 ALTER TABLE `student_info`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
