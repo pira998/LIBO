@@ -225,6 +225,12 @@
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
+
+.material-card.mc-active img{
+  height:60px;
+  width: 60px;
+
+}
 .material-card.mc-active .img-container {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;

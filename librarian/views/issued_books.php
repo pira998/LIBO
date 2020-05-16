@@ -1,5 +1,19 @@
 <?php
-include 'header.php';; ?>
+include 'header.php';
+if (!isset($_SESSION['librarian'])) {
+
+    $_SESSION['msg'] = "You must log in first to view this page";
+    header("location: ../sign_in.php");
+}
+
+if (isset($_GET['logout'])) {
+
+    session_destroy();
+    unset($_SESSION['librarian']);
+    header("location: ../sign_in.php");
+}
+
+ ?>
 
 
 <div class="content">

@@ -1,5 +1,23 @@
 <?php
-include 'header.php'; ?>
+include 'header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
+if (!isset($_SESSION['librarian'])) {
+
+    $_SESSION['msg'] = "You must log in first to view this page";
+    header("location: ../sign_in.php");
+}
+
+if (isset($_GET['logout'])) {
+
+    session_destroy();
+    unset($_SESSION['librarian']);
+    header("location: ../sign_in.php");
+}
+include $_SERVER['DOCUMENT_ROOT'] . '/classes/book.php';
+$sql = "SELECT * FROM `books_details`;";
+$array = mysqli_query($connection, $sql);
+
+?>
 
 
 <div class="content">
@@ -14,36 +32,39 @@ include 'header.php'; ?>
         <!-- <div class="row"> -->
         <div class="row active-with-click">
             <?php
-            $x = 10;
-            while ($x--) {
+
+            while ($obj = mysqli_fetch_array($array)) {
+                $book = new Book($obj);
+                
+
             ?>
 
-                <div class="column" style="padding: 10px;">
-                    <div class="card" style="width: 10rem;">
-                        <img class="card-img-top" src="/librarian/assets/img/book_images/53d345282593dc27d03a8222d41fa144s-l1600.jpg" rel="nofollow" alt="Card image cap">
+                <!-- <div class="column" style="padding: 10px;">
+                    <div class="card" style="width: 10rem; height:25rem">
+                        <img class="card-img-top" src="/librarian/assets/img/<?php echo $book->getBookImg() ?>" rel="nofollow" alt="Card image cap">
                         <div class="card-body">
-                            <p class="card-text">Book Quantity: 10 <br> Book availability: 5 <br>
+                            <p class="card-text">Book Quantity: <?php echo $book->getAvailable() ?> <br> Book availability: <?php echo $book->getQuantity() ?> <br>
                                 <center><button class="btn btn-primary" type="submit">Edit</button></center>
                             </p>
                         </div>
                     </div>
-                </div>
-                <!-- 
+                </div> -->
+                <!-- <!--  -->
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <article class="material-card Red">
+                    <article class="material-card Purple">
                         <h2>
-                            <span>Computer kiramam</span>
+                            <span><?php echo $book->getTitle() ?></span>
                             <strong>
                                 <i class="fa fa-fw fa-star"></i>
-                                Sujatha
+                                <?php echo $book->getAuthor();?>
                             </strong>
                         </h2>
                         <div class="mc-content">
                             <div class="img-container">
-                                <img class="img-fluid" src="/librarian/assets/img/book_images/53d345282593dc27d03a8222d41fa144s-l1600.jpg">
+                                <img class="img-fluid"" src="/librarian/assets/img/<?php echo $book->getBookImg() ?>">
                             </div>
                             <div class="mc-description">
-                                Book Quantity: 100<br> Book Available: 90<br> No of Reservation: 91<br>
+                                Book Quantity: <?php echo $book->getAvailable() ?><br> Book Available:<?php echo $book->getAvailable() ?><br> No of Reservation: 91<br>
                             </div>
                         </div>
                         <a class="mc-btn-action">
@@ -51,15 +72,15 @@ include 'header.php'; ?>
                         </a>
                         <div class="mc-footer">
                             <h4>
-                                Social
+                                Edit
                             </h4>
-                            <a href="edit_book.php?id=1" class="fa fa-fw fa-edit "></a>
-                            
+                            <a href="edit_book.php?id=<?php echo $book->getId(); ?>" class="fa fa-fw fa-edit "></a>
+
                         </div>
                     </article>
                 </div>
 
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <!-- <div class="col-md-4 col-sm-6 col-xs-12">
                     <article class="material-card Cyan">
                         <h2>
                             <span>Jack Nicholson</span>
@@ -89,7 +110,7 @@ include 'header.php'; ?>
                             <a class="fa fa-fw fa-google-plus"></a>
                         </div>
                     </article>
-                </div> -->
+                </div> - -->
 
             <?php
 

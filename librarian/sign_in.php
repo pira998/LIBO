@@ -87,10 +87,7 @@ include("server_.php");
         </div>
     </div>
 
-    <?php
-
-
-?>
+ 
 
 
 

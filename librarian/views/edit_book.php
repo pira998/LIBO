@@ -2,25 +2,28 @@
 include 'header.php';
 
 
-if(!isset($_SESSION['librarian'])){
+if (!isset($_SESSION['librarian'])) {
 
     $_SESSION['msg'] = "You must log in first to view this page";
     header("location: ../sign_in.php");
 }
 
-if(isset($_GET['logout'])){
+if (isset($_GET['logout'])) {
 
     session_destroy();
     unset($_SESSION['librarian']);
     header("location: ../sign_in.php");
 }
-
-
-
-
 include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/classes/book.php';
+$id = $_GET['id'];
+$sql = "SELECT * FROM `books_details` where id='$id';";
+$array = mysqli_query($connection, $sql);
+$obj = mysqli_fetch_array($array);
+$book = new Book($obj);
 
 ?>
+
 
 <div class="content">
     <div class="container-fluid">
@@ -28,21 +31,21 @@ include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title">Edit Profile</h4>
-                        <p class="card-category">Complete your profile</p>
+                        <h4 class="card-title">Edit Book Detail</h4>
+                        <p class="card-category">More information</p>
                     </div>
                     <div class="card-body">
                         <form>
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Company (disabled)</label>
+                                        <label class="bmd-label-floating"><?php echo $book->getId(); ?> (id disabled)</label>
                                         <input type="text" class="form-control" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Username</label>
+                                        <label class="bmd-label-floating"><?php echo $book->getTitle(); ?>(Title)</label>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
@@ -134,4 +137,4 @@ include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
 </div>
 
 
- <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
