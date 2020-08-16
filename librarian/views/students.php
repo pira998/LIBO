@@ -31,8 +31,6 @@ if (isset($_GET['logout'])) {
 ?>
 
 
-?>
-
 
 <div class="content">
     <div class="container-fluid">
@@ -117,7 +115,7 @@ if (isset($_GET['logout'])) {
                                     <div class="form-group bmd-form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="pets">pets</i></div>
+                                                <div class="input-group-text"><i class="material-icons">pets</i></div>
                                             </div>
                                             <input type="text" class="form-control" placeholder="Nic..." name="nic" required>
                                         </div>

@@ -25,7 +25,7 @@ session_start();
     <link rel="stylesheet" href="/librarian/assets/css/card.css" />
     <link rel="stylesheet/less" type="text/css" href="/librarian/assets/scss/card.less" />
     <link rel="stylesheet" href="/librarian/assets/css/table.css">
-    <!-- <link rel="stylesheet" href="/librarian/assets/css/bootstrap.min.css"> -->
+     <link rel="stylesheet" href="/librarian/assets/css/bootstrap.min.css"> 
 </head>
 
 <body class="">
@@ -42,50 +42,50 @@ session_start();
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="nav-item active  ">
-                        <a class="nav-link" href="/librarian/views/dashboard.php">
+                        <a class="nav-link" href="../views/dashboard.php">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/librarian/views/user_profile.php">
+                        <a class="nav-link" href="../views/user_profile.php">
                             <i class="material-icons">person</i>
                             <p>Librarian Profile</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/librarian/views/students.php">
+                        <a class="nav-link" href="../views/students.php">
                             <i class="material-icons">group</i>
                             <p>Students</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/librarian/views/books.php">
+                        <a class="nav-link" href="../views/books.php">
                             <i class="material-icons">library_books</i>
                             <p>Books</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/librarian/views/issued_books.php">
+                        <a class="nav-link" href="../views/issued_books.php">
                             <i class="material-icons">library_books</i>
                             <p>Issued book</p>
                         </a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link" href="/librarian/views/message.php">
+                        <a class="nav-link" href="../views/message.php">
                             <i class="material-icons">message</i>
                             <p>Message</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/librarian/views/student_report.php">
+                        <a class="nav-link" href="../views/student_report.php">
                             <i class="material-icons">report</i>
                             <p>Students Report</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/librarian/views/book_report.php">
+                        <a class="nav-link" href="../views/book_report.php">
                             <i class="material-icons">report</i>
                             <p>Book Report</p>
                         </a>

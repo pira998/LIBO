@@ -92,7 +92,7 @@ window.location = "sign_in.php"
         $_SESSION["librarian"] =$_POST["username"];
         ?>
 <script type="text/javascript">
-window.location = "/librarian/views/dashboard.php"
+window.location = "../librarian/views/dashboard.php"
 </script>
 
 

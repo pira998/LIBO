@@ -16,7 +16,7 @@ if (isset($_GET['logout'])) {
 
 
 ?>
-
+<link rel="stylesheet" href="/librarian/assets/css/bootstrap.min.css">
 
 <div class="container" style="padding-top: 100px">
 
@@ -49,4 +49,16 @@ if (isset($_GET['logout'])) {
         </div>
     </div>
 </div>
+
+<div class="form-group form-file-upload form-file-simple">
+    <input type="file" class="form-control inputFileVisible" placeholder="Simple chooser...">
+    
+</div>
+
+<form>
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Example file input</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    </div>
+</form>
 <?php include 'footer.php'; ?>
