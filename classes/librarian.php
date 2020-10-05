@@ -1,84 +1,102 @@
-<?php 
-class Librarian{
-
-
-private $id, $register_no, $firstname, $lastname, $username, $grade, $address, $email, $nic, $status;
-public function __construct($details)
+<?php
+class Librarian
 {
 
-$details[]=$details;
-$this->id = $details['id'];
-$this->register_no = $details['regis_num'];
-$this->firstname = $details['firstname'];
-$this->lastname = $details['lastname'];
-$this->username = $details['username'];
-$this->email = $details['email'];
-$this->grade = $details['grade'];
-$this->address = $details['Address'];
-$this->nic = $details['nic'];
-$this->status = $details['status'];
-}
-public function getId()
-{
-return $this->id;
-}
 
-public function getRegisterNo()
-{
-return $this->register_no;
-}
+    private $id, $firstname, $lastname, $username, $address, $email, $nic, $status;
+    public function __construct($details)
+    {
 
-public function getFirstname()
-{
-return $this->firstname;
-}
+        $details[] = $details;
+        $this->id = $details['id'];
 
-public function getLastname()
-{
-return $this->lastname;
-}
+        $this->firstname = $details['firstname'];
+        $this->lastname = $details['lastname'];
+        $this->username = $details['username'];
+        $this->email = $details['email'];
 
-public function getUsername()
-{
-return $this->username;
-}
-
-public function getGrade()
-{
-return $this->grade;
-}
-
-public function getAddress()
-{
-return $this->address;
-}
-public function getEmail()
-{
-return $this->email;
-}
-public function getNic()
-{
-return $this->nic;
-}
-public function getStatus()
-{
-return $this->status;
-}
-public function updateStudent($id,$regis_num, $firstname, $lastname, $username, $grade, $address, $email, $nic){
-$this->register_no = $regis_num;
-$this->firstname = $firstname;
-$this->lastname = $lastname;
-$this->username = $username;
-$this->email =$email;
-$this->grade = $grade;
-$this->address = $address;
-$this->nic = $nic;
+        $this->nic = $details['nic'];
+        $this->address = $details['address'];
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
 
 
-return "UPDATE `student_info` SET `regis_num`='" . $regis_num . "',`firstname`='" . $firstname . "',`lastname`='" . $lastname . "',`username`='" . $username . "' ,`grade`='" . $grade . "' ,`Address`='" . $address . "',`email`='" . $email . "' ,`nic`='" . $nic . "' WHERE `id`='" . $id . "'";
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
 
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+
+    public function getAddress()
+    {
+        return $this->address;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getNic()
+    {
+        return $this->nic;
+    }
+    public function updateLibrarian($post, $connection, $id)
+    {
+
+        $this->firstname = $post['firstname'];
+        $this->lastname = $post['lastname'];
+        $this->email = $post['email'];
+        $this->address = $post['address'];
+        $this->nic = $post['nic'];
+
+
+
+        $user_check_query =  "UPDATE `librarian` SET `firstname`='" .  $post['firstname'] . "',`lastname`='" . $post['lastname'] . "',`address`='" . $post['address'] . "',`email`='" . $post['email'] . "' ,`nic`='" . $post['nic'] . "' WHERE `id`='" . $id . "'";
+
+        mysqli_query($connection, $user_check_query);
+?>
+
+        <script type="text/javascript">
+            window.location = ("../views/user_profile.php?id=<?php echo $id; ?>")
+        </script>
+
+    <?php
+    }
+    public function issueBook($post)
+    {
+
+        $created_time = time();
+        $due_time =$created_time+ (7 * 24 * 60 * 60);
+        $sql = "INSERT INTO `borrowed_books` VALUES('','$post[book_id]','$post[user_id]','$created_time','$due_time','No')";
+        $sql_for_update ="UPDATE `books_details` SET available= available-1 WHERE (`id`=$post[book_id]);";
+        
+        $connection = Connector::getConnection();
+        mysqli_query($connection, $sql);
+        mysqli_query($connection, $sql_for_update);
+        echo "alert('Successfully issued')";
+    ?>
+        <script type="text/javascript">
+            window.location = "issued_books.php"
+        </script>
+<?php
+    }
 }
 
-}
+
+
+
+
 
 ?>

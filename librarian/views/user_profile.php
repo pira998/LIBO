@@ -2,13 +2,13 @@
 include 'header.php';
 
 
-if(!isset($_SESSION['librarian'])){
+if (!isset($_SESSION['librarian'])) {
 
     $_SESSION['msg'] = "You must log in first to view this page";
     header("location: ../sign_in.php");
 }
 
-if(isset($_GET['logout'])){
+if (isset($_GET['logout'])) {
 
     session_destroy();
     unset($_SESSION['librarian']);
@@ -18,7 +18,11 @@ if(isset($_GET['logout'])){
 
 
 
-include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
+
+
+
+
+
 
 ?>
 
@@ -32,69 +36,56 @@ include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
                         <p class="card-category">Complete your profile</p>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form class="form" method="post">
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Company (disabled)</label>
-                                        <input type="text" class="form-control" disabled>
+                                        <label class="bmd-label-floating">Id (disabled)</label>
+                                        <input type="text" class="form-control" name="id" value="<?php echo $librarian->getId(); ?> " disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">NIC(disabled)</label>
+                                        <input type="text" class="form-control" name="nic" value="<?php echo $librarian->getNic(); ?> " disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Username</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="username" value="<?php echo $librarian->getUsername(); ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Email address</label>
-                                        <input type="email" class="form-control">
+                                        <label class="bmd-label-floating">Email</label>
+                                        <input type="email" class="form-control" name="email" value="<?php echo $librarian->getEmail(); ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Fist Name</label>
-                                        <input type="text" class="form-control">
+                                        <label class="bmd-label-floating">Username</label>
+                                        <input type="text" class="form-control" name="firstname" value="<?php echo $librarian->getFirstname(); ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Last Name</label>
-                                        <input type="text" class="form-control">
+                                        <label class="bmd-label-floating">Lastname</label>
+                                        <input type="text" class="form-control" name="lastname" value="<?php echo $librarian->getLastname(); ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Adress</label>
-                                        <input type="text" class="form-control">
+                                        <label class="bmd-label-floating">Address</label>
+                                        <input type="text" class="form-control" name="address" value="<?php echo $librarian->getAddress(); ?>">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">City</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Country</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Postal Code</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -106,7 +97,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                            <input type="submit" class="btn btn-primary pull-right" name="Update" value="Update"></input>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -116,12 +107,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
                 <div class="card card-profile">
                     <div class="card-avatar">
                         <a href="javascript:;">
-                            <img class="img" src="../assets/img/faces/marc.jpg" />
+                            <img class="img" src="../assets/img/faces/marc.jpeg" />
                         </a>
                     </div>
                     <div class="card-body">
-                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                        <h4 class="card-title">Alec Thompson</h4>
+                        <h6 class="card-category text-gray">Librarian</h6>
+                        <h4 class="card-title"><?php echo $librarian->getUsername(); ?></h4>
                         <p class="card-description">
                             Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                         </p>
@@ -134,4 +125,14 @@ include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
 </div>
 
 
- <?php include 'footer.php'; ?>
+<?php
+
+if (isset($_POST['Update'])) {
+
+    $librarian->updateLibrarian($_POST, $connection, $librarian->getId());
+}
+
+
+
+
+include 'footer.php'; ?>

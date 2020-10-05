@@ -51,15 +51,16 @@
                     <ul class="nav-menu">
                         <li><a href="index.php">Home</a></li>
                         <li><a href="about.php">About</a></li>
-                        <li><a href="book.php">Books</a></li>
-                        <li class="menu-has-children"><a href="">News</a>
+
+                        <!-- <li class="menu-has-children"><a href="">News</a>
                             <ul>
                                 <li><a href="elements.html">Elements</a></li>
                             </ul>
-                        </li>
-                        
+                        </li> -->
+
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="signin.php">SignIn</a></li>
+                        <li><a href="/librarian/sign_in.php">Student SignIn</a></li>
+                        <li><a href="/student/sign_in.php">Librarian SignIn</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>

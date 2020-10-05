@@ -1,5 +1,7 @@
-<?php 
+<?php
 session_start();
+include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/classes/librarian.php';
 ?>
 
 <!DOCTYPE html>
@@ -25,10 +27,21 @@ session_start();
     <link rel="stylesheet" href="/librarian/assets/css/card.css" />
     <link rel="stylesheet/less" type="text/css" href="/librarian/assets/scss/card.less" />
     <link rel="stylesheet" href="/librarian/assets/css/table.css">
-     <link rel="stylesheet" href="/librarian/assets/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="/librarian/assets/css/bootstrap.min.css">
 </head>
 
 <body class="">
+    <?php
+
+        $username = $_SESSION['librarian'];
+        $sql = "SELECT * FROM `librarian` where username='$username';";
+        $array = mysqli_query($connection, $sql);
+        $obj = mysqli_fetch_array($array);
+        $librarian = new Librarian($obj);
+
+    ?>
+
+
     <div class="wrapper ">
         <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
             <!--
@@ -48,7 +61,8 @@ session_start();
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="../views/user_profile.php">
+                        <a class="nav-link" href="../views/user_profile.php?id=<?php echo $librarian->getId(); ?>">
+
                             <i class="material-icons">person</i>
                             <p>Librarian Profile</p>
                         </a>
@@ -79,9 +93,9 @@ session_start();
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="../views/student_report.php">
+                        <a class="nav-link" href="../views/book_request.php">
                             <i class="material-icons">report</i>
-                            <p>Students Report</p>
+                            <p>Book Request</p>
                         </a>
                     </li>
                     <li class="nav-item ">
@@ -108,24 +122,9 @@ session_start();
                         <span class="navbar-toggler-icon icon-bar"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end">
-                        <form class="navbar-form">
-                            <div class="input-group no-border">
-                                <input type="text" value="" class="form-control" placeholder="Search...">
-                                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                    <i class="material-icons">search</i>
-                                    <div class="ripple-container"></div>
-                                </button>
-                            </div>
-                        </form>
+
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="javascript:;">
-                                    <i class="material-icons">dashboard</i>
-                                    <p class="d-lg-none d-md-block">
-                                        Stats
-                                    </p>
-                                </a>
-                            </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">notifications</i>

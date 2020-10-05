@@ -1,37 +1,30 @@
+
+
+
+<!--
+//$connection=mysqli_connect("localhost","root","Shanmu@25621","database"); -->
 <?php
+class Connector{
+    private static $server = "localhost";
+    private static $username ="root";
+    private static $password = "";
+    private static $db = "l";
 
+    private static $connection=null;
 
-class DBConnection {
-    private $server = "localhost";
-    private $username ="root";
-    private $password = "";
-    private $db = "l";
+    private function __construct(){
 
-    public $conn = null;
-
-    public function __construct(){
-        try{
-            $this->conn = new mysqli($this->server, $this->username, $this->password, $this->db);
-            if ($this->conn->connect_error){
-
-                throw new Exception("Error occurred: ".$this->conn->connect_error);
-                
-            }
-            
-        }    
-        catch(Exception $e){
-
-            echo $e -> getMessage();
-
-        }
     }
-    
+
+    public static function getConnection(){
+        if (self::$connection ==null){
+            self::$connection=mysqli_connect(self::$server,self::$username,self::$password,self::$db);
+        }
+        return self::$connection;
+    }
 }
-$database = new DBConnection();
-$connection = $database->conn;
+
+$connection=Connector::getConnection();
+
 
 ?>
-
-
-<!-- 
-//$connection=mysqli_connect("localhost","root","Shanmu@25621","database"); -->

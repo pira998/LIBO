@@ -1,6 +1,5 @@
 <?php
 include 'header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/classes/student.php';
 $sql = "SELECT * FROM `student_info`";
 $array = mysqli_query($connection, $sql);

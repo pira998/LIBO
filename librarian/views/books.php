@@ -1,6 +1,6 @@
 <?php
 include 'header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/utility/connection.php';
+
 if (!isset($_SESSION['librarian'])) {
 
     $_SESSION['msg'] = "You must log in first to view this page";
@@ -13,7 +13,9 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['librarian']);
     header("location: ../sign_in.php");
 }
-include $_SERVER['DOCUMENT_ROOT'] . '/classes/book.php';
+
+include $_SERVER['DOCUMENT_ROOT'] . '/classes/bookFactory.php';
+
 $sql = "SELECT * FROM `books_details`;";
 $array = mysqli_query($connection, $sql);
 
@@ -40,7 +42,14 @@ $array = mysqli_query($connection, $sql);
                         <form class="form" method="post" action="" enctype="multipart/form-data">
 
                             <div class="card-body">
-
+                                <div class="form-group bmd-form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="material-icons">face</i></div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Book Id" name="id" required="">
+                                    </div>
+                                </div>
                                 <div class="form-group bmd-form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -57,6 +66,7 @@ $array = mysqli_query($connection, $sql);
                                         <input type="text" class="form-control" placeholder="Title..." name="title" required>
                                     </div>
                                 </div>
+
                                 <div class="form-group bmd-form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -65,7 +75,8 @@ $array = mysqli_query($connection, $sql);
                                         <input type="text" class="form-control" placeholder="Subject..." name="subject" required>
                                     </div>
                                 </div>
-                                <div class="form-group form-file-upload form-file-multiple">
+
+                                <!-- <div class="form-group form-file-upload form-file-multiple">
                                     <div class="input-group">
                                         <button type="file" class="btn btn-fab btn-round btn-primary">
                                             <i class="material-icons">attach_file</i>
@@ -75,15 +86,16 @@ $array = mysqli_query($connection, $sql);
 
                                         </span>
                                     </div>
-                                </div>
-                                    <div class="form-group bmd-form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="material-icons">email</i></div>
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="Email..." name="email" required>
+                                </div> -->
+                                <input type="file" name="bb" id="bb">
+                                <div class="form-group bmd-form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="material-icons">email</i></div>
                                         </div>
+                                        <input type="text" class="form-control" placeholder="Email..." name="email" required>
                                     </div>
+
 
                                     <div class="form-group bmd-form-group">
                                         <div class="input-group">
@@ -102,6 +114,7 @@ $array = mysqli_query($connection, $sql);
                                             <input type="text" class="form-control" placeholder="Languages..." name="language" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group bmd-form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -171,6 +184,34 @@ $array = mysqli_query($connection, $sql);
         </div>
 
     </center>
+
+
+
+    <?php
+
+    if (isset($_POST["create"])) {
+        $tm = md5(time());
+        $fnm = $_FILES['bb']['name'];
+        $dst = __DIR__ . "/../../librarian/assets/img/book_images/" . $tm . $fnm;
+        $dst1 = "book_images/" . $tm . $fnm;
+
+        move_uploaded_file($_FILES['bb']['tmp_name'], $dst);
+
+        $_POST['bookImg'] = $dst1;
+        $bookItem = new Book($_POST);
+        $bookItem->createBook($connection, $_POST, $_SESSION);
+    }
+
+    ?>
+
+
+
+
+
+
+
+
+
     <div class="container-fluid">
         <!-- <div class="row"> -->
 
@@ -179,7 +220,8 @@ $array = mysqli_query($connection, $sql);
             <?php
 
             while ($obj = mysqli_fetch_array($array)) {
-                $book = new Book($obj);
+                $bookFactory = new bookFactory();
+                $book = $bookFactory->createBook($obj);
 
 
             ?>
@@ -189,12 +231,13 @@ $array = mysqli_query($connection, $sql);
                         <img class="card-img-top" src="/librarian/assets/img/<?php echo $book->getBookImg() ?>" rel="nofollow" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">Book Quantity: <?php echo $book->getAvailable() ?> <br> Book availability: <?php echo $book->getQuantity() ?> <br>
-                                <center><button class="btn btn-primary" type="submit">Edit</button></center>
+                                <a href="edit_book.php?id=<?php echo $book->getId(); ?>" ><button class="btn btn-primary" type="submit">Edit</button></a>
+                                
                             </p>
                         </div>
                     </div>
-                </div> -->
-                <!-- <!--  -->
+                </div>
+                <!--  -->
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <article class="material-card Indigo">
                         <h2>

@@ -1,5 +1,9 @@
 <?php
 include 'header.php';
+
+
+include $_SERVER['DOCUMENT_ROOT'] . '/classes/Mediator.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/classes/MediatorImp.php';
 if (!isset($_SESSION['librarian'])) {
 
     $_SESSION['msg'] = "You must log in first to view this page";
@@ -16,43 +20,106 @@ if (isset($_GET['logout'])) {
 
 ?>
 
-<div class="container" style="padding-top: 100px">
+<div class="content">
+    <div class="container-fluid">
+        <center>
+            <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#exampleModal">
+                Compose
+            </button>
 
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New Message</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form" method="post" action="">
 
+                                <div class="card-body">
 
+                                    <div class="form-group bmd-form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="material-icons">face</i></div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Subject..." name="subject" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group bmd-form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="material-icons">face</i></div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Body..." name="body" required>
+                                        </div>
+                                    </div>
 
-    <div class="inbox-body">
-        <div class="mail-option">
-            <center>
-                <button class="btn btn-primary btn-round" type="submit" name="add">
-                    <i class="material-icons">favorite</i> Compose
-                </button>
-            </center>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-primary" name="create" value="Send"></input>
+                                </div>
+                            </form>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
 
-            <ul class="unstyled inbox-pagination">
-                <li><span>1-50 of 234</span></li>
-                <li>
-                    <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
-                </li>
-                <li>
-                    <a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
-                </li>
-            </ul>
-            </>
+        </center>
+        <?php
+        $sql = "SELECT * FROM `messages`ORDER BY `created_time` DESC";
+        $connection = Connector::getConnection();
+        $query = mysqli_query($connection, $sql);
+        ?>
+        <table class="table table-inbox table-hover">
+            <tbody>
+                <tr class="unread">
+                    <th class="view-message ">No</th>
+                    <th class="view-message  dont-show">Subject</th>
+                    <th class="view-message ">Body</th>
+                    <th class="view-message ">Send Date</th>
 
-            <table class="table table-inbox table-hover">
-                <tbody>
+                </tr>
+
+                <?php
+                while ($m = mysqli_fetch_array($query)) {
+                ?>
+
                     <tr class="unread">
-                        <td class="inbox-small-cells">
-                            <input type="checkbox" class="mail-checkbox">
-                        </td>
-                        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
-                        <td class="view-message  dont-show">PHPClass</td>
-                        <td class="view-message ">Added a new class: Login Class Fast Site</td>
-                        <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-                        <td class="view-message  text-right">9:27 AM</td>
+                        <td class="view-message  dont-show"><?php echo $m['id'] ?></td>
+                        <td class="view-message  dont-show"><?php echo $m['subject'] ?></td>
+                        <td class="view-message "><?php echo $m['body'] ?></td>
+                        <td class="view-message "><?php echo date('d/m/Y', $m['created_time']) ?></td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
+                <?php } ?>
+
+                <br>
+            </tbody>
+        </table>
+
+
+
+
+
+        <?php
+        if (isset($_POST['create'])) {
+
+            $mediator = new MediatorImp();
+
+            $sql = $mediator->sendMessage($_POST, $connection);
+
+            
+
+        }
+
+
+        include 'footer.php';
+        ?>
+
+        
