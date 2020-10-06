@@ -188,7 +188,7 @@ if (isset($_POST['Update'])) {
 }
 if (isset($_POST['Delete'])) {
     $book->deleteBook($id, $connection);
-    echo "hi";
+ 
 }
 
 include 'footer.php';

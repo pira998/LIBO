@@ -23,7 +23,7 @@ class Book extends BookAbstract
         if (count($errors) == 0) {
 
             $sql = "INSERT INTO books_details VALUES ('$post[id]','$post[ISBN]','$post[title]','$post[subject]','$post[bookImg]' ,'$post[publisher]','$post[language]','$post[price]','$post[author]','$post[numOfPages]','$post[purchaseDate]','$post[publicationDate]','$post[quantity]','$post[available]','$session[librarian]');";
-            $m = mysqli_query($connection, $sql);
+            mysqli_query($connection, $sql);
 
 
 ?>
